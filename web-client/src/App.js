@@ -14,7 +14,7 @@ function App() {
 
   const getItemList = async () => {
     const response = await fetch(`${baseURL}/room`);
-    response.json().then((res) => setItemList(res.data));
+    response.json().then((data) => setItemList(data));
     console.log(itemList);
   };
 
@@ -41,18 +41,17 @@ function App() {
   }
 }
 
-function Item(props) {
+function Item({item}) {
 
-  const [item, setItem] = useState(null)
+  const [value, setValue] = useState(0)
 
   useEffect(() => {
-    setItem(props.item)
+    setInterval(updateCount, 1000)
   })
 
-  const incCount = async (id) => {
-    const response = await fetch(`${baseURL}/room/${id}/value`);
-    response.json().then((res) => setItem(res.data.value));
-    console.log(item);
+  const updateCount = async () => {
+    const response = await fetch(`${baseURL}/room/${item.id}/value`);
+    response.json().then((data) => setValue(data.value));
   };
 
   if(item){
@@ -60,8 +59,7 @@ function Item(props) {
       <div>
         <img src={'https://media.istockphoto.com/photos/trees-forming-a-heart-picture-id537373196?k=20&m=537373196&s=612x612&w=0&h=Y6zpQNFrhLp9lusVP5xbJ8s6H9i0hOZlQwhhPxHlGXU='} className="image"/>
         <div>name = {item.title}</div>
-        <div>count = {item.count}</div>
-        {/* <button onClick=incCount(item.id)}>Click</button> */}
+        <div>count = {value}</div>
       </div>
     )
   }
