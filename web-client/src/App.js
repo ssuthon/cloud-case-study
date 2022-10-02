@@ -57,8 +57,8 @@ function Item({item}) {
     return (
       <div>
         <img src={`${conf.imgPrefix}/${item.image}`} className="image"/>
-        <div>name = {item.title}</div>
-        <div>count = {value}</div>
+        <div>{item.title}</div>
+        <div>{value}</div>
       </div>
     )
   }
