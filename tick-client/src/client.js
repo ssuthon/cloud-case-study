@@ -14,7 +14,7 @@ function tick(){
 //Connect to the server on the configured port 
 client.connect(conf.port, conf.host, function(){
 	//Log when the connection is established
-  console.log(`Cleint: Connected to server ${conf.host}:${conf.port}`);
+  console.log(`Client: Connected to server ${conf.host}:${conf.port}`);
   tick();  
 });
 
