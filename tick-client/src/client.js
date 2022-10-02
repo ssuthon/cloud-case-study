@@ -7,7 +7,7 @@ const client = new Socket();
 
 function tick(){
   setTimeout(()=>{
-    client.write(`tick::${conf.tickId}`);
+    client.write(`tick::${conf.roomId}`);
   }, 3000)
 }
 
