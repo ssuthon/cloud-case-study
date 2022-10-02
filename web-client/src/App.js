@@ -44,7 +44,7 @@ function Item({item}) {
   const [value, setValue] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(updateCount, 3000)
+    const interval = setInterval(updateCount, 1000)
     return () => clearInterval(interval);
   }, [])
 
