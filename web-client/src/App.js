@@ -7,14 +7,14 @@ function App() {
   const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
-    getItemList()
-  })
+    const fetchData = async () => {
+      const response = await fetch(`${conf.apiPrefix}/room`);
+      let itemList =  await response.json();
+      setItemList(itemList)
+    }
 
-  const getItemList = async () => {
-    const response = await fetch(`${conf.apiPrefix}/room`);
-    response.json().then((data) => setItemList(data));
-    console.log(itemList);
-  };
+    fetchData()
+  }, [])
 
   if(itemList.length > 0){
     return (
@@ -44,12 +44,13 @@ function Item({item}) {
   const [value, setValue] = useState(0)
 
   useEffect(() => {
-    setInterval(updateCount, 1000)
-  })
+    const interval = setInterval(updateCount, 3000)
+    return () => clearInterval(interval);
+  }, [])
 
   const updateCount = async () => {
     const response = await fetch(`${conf.apiPrefix}/room/${item.id}/value`);
-    response.json().then((data) => setValue(data.value));
+    setValue((await response.json()).value);
   };
 
   if(item){
