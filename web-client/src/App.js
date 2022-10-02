@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from "react";
-
-const baseURL = "http://localhost:8000/api";
+import conf from './config';
 
 function App() {
 
@@ -13,7 +11,7 @@ function App() {
   })
 
   const getItemList = async () => {
-    const response = await fetch(`${baseURL}/room`);
+    const response = await fetch(`${conf.apiPrefix}/room`);
     response.json().then((data) => setItemList(data));
     console.log(itemList);
   };
@@ -50,14 +48,14 @@ function Item({item}) {
   })
 
   const updateCount = async () => {
-    const response = await fetch(`${baseURL}/room/${item.id}/value`);
+    const response = await fetch(`${conf.apiPrefix}/room/${item.id}/value`);
     response.json().then((data) => setValue(data.value));
   };
 
   if(item){
     return (
       <div>
-        <img src={'https://media.istockphoto.com/photos/trees-forming-a-heart-picture-id537373196?k=20&m=537373196&s=612x612&w=0&h=Y6zpQNFrhLp9lusVP5xbJ8s6H9i0hOZlQwhhPxHlGXU='} className="image"/>
+        <img src={`${conf.imgPrefix}/${item.image}`} className="image"/>
         <div>name = {item.title}</div>
         <div>count = {value}</div>
       </div>
